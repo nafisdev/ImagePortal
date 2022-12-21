@@ -1,0 +1,46 @@
+version: '3.7'
+services:
+
+  # # MySQL service
+  imageportal_mysqldb:
+      container_name: "imageportal_mysqldb"
+      build: ./docker/mysql
+      hostname: imageportal_mysqldb
+      tty: true
+      ports:
+          - '3308:3306'
+      # Environment used to create the relevant DB and user
+      environment:
+          MYSQL_DATABASE: imageportal
+          MYSQL_USER: imageportal
+          MYSQL_PASSWORD: imageportal
+          MYSQL_ROOT_PASSWORD: imageportal
+      # Specifying a restart policy for the containerized service
+      restart: always
+      volumes:
+          - ./log/mysql:/var/log/mysql
+      networks:
+          - imageportal-network
+
+  imageportal_webapi:
+    container_name: "imageportal_webapp"
+    build:
+      context: .
+    ports:
+      - "5400:5400"
+      - 443
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    command: dotnet run /app/imageportal.api
+    networks:
+      - imageportal-network
+    depends_on:
+      - imageportal_mysqldb
+        
+
+# volumes to be generated, these are saved somewhere for repeated use by docker
+volumes:
+    neo4j_data:
+networks:
+  imageportal-network:
+    driver: bridge
