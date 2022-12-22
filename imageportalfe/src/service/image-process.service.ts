@@ -9,7 +9,16 @@ export class ImageProcessService {
 
   constructor(private http: HttpClient) { }
   uploadImage(req: any) {
-    debugger;
     return this.http.post(`${this.baseUrl}/UploadImage`, req)
   }
+  getData(path: string) {
+    return this.http.get(`${this.baseUrl}/GetImage/${path}`)
+    // return this.http.get('/assets/config.json');
+  }
+
+  getImages() {
+    return this.http.get(`${this.baseUrl}/GetImages`)
+    // return this.http.get('/assets/config.json');
+  }
+
 }

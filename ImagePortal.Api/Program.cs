@@ -1,14 +1,25 @@
+using ImagePortal.Api.Model;
 using ImagePortal.Api.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddDbContext<ImageStore>();
 builder.Services.AddControllers();
 builder.Services.AddSingleton<IFileService,FileService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy  =>
+                      {
+                          policy.WithOrigins("*");
+                      });
+});
 
 
 var app = builder.Build();
@@ -21,7 +32,7 @@ if (app.Environment.IsDevelopment())
 }
 
 // app.UseHttpsRedirection();
-
+app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthorization();
 
 app.MapControllers();

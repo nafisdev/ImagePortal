@@ -1,5 +1,6 @@
 <div class="container">
-    <app-image>
-        
-    </app-image>
+    <li *ngFor="let item of items; index as i">    <app-image [ImageData]="item">
+
+    </app-image></li>
+
 </div>

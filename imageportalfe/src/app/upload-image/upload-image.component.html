@@ -1,10 +1,11 @@
 <div class="row">
-<div class="form-group">
+<form name="f" [formGroup]="imageGroup" class="form">
     Image Name
-    <input class="form-control" formControlName="ImageName" pInputText>
-</div>
+    <input class="form-control" formControlName="imageName" pInputText>
 <label class="browse-btn">
 <!-- <img [src]=""> -->
-<input type="file" accept=".png, .jpg" class="input-file" (change)="handleFileInput($event)" #fileinput>
+<input type="file" accept=".png, .jpg" class="input-file" formControlName="imageFile"  (change)="OnSelect($event)" #fileinput>
+<button (click)="handleFileInput($event)" >Submit</button>
 </label>
+</form>
 </div>

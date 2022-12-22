@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ImageComponent } from './image/image.component';
+import { AppComponent } from './app.component';
+import { ImageListComponent } from './image-list/image-list.component';
 
 const routes: Routes = [
-  {
-    path: 'Image',
-    component: ImageComponent
-  }
-
+  { path: 'image',
+    component: ImageListComponent  },
 ];
 
 @NgModule({

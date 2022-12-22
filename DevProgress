@@ -1,2 +1,5 @@
 dotnet new webapi --framework net6.0
 dotnet add package MySql.EntityFrameworkCore --version 6.0.4
+
+dotnet ef migrations add InitialCreate
+ dotnet ef database update

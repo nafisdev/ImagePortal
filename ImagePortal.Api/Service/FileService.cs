@@ -13,7 +13,7 @@ namespace ImagePortal.Api.Service
             {
                 info.Create();
             }
-            using (FileStream outputFileStream = new FileStream(Path.Combine(folderName,imageName+".jpg"), FileMode.Create))
+            using (FileStream outputFileStream = new FileStream(Path.Combine(folderName,imageName), FileMode.Create))
             {
                 stream.CopyTo(outputFileStream);
             }
